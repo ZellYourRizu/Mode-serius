@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZellYourQuotes</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:black;
+color:white;
+overflow-x:hidden;
+}
+
+/* HIDE CURSOR DESKTOP */
+@media(min-width:768px){
+body{cursor:none;}
+}
+
+/* CURSOR DOT */
+.cursor-dot{
+position:fixed;
+width:10px;
+height:10px;
+border-radius:50%;
+background:#ff4df0;
+pointer-events:none;
+z-index:9999;
+box-shadow:0 0 12px #ff4df0,0 0 25px #ff4df0;
+transform:translate(-50%,-50%);
+}
+
+/* SPARK */
+.spark{
+position:fixed;
+width:6px;
+height:6px;
+border-radius:50%;
+background:radial-gradient(circle,#ff9cf7,#ff4df0,transparent);
+pointer-events:none;
+animation:spark .7s linear forwards;
+}
+
+@keyframes spark{
+to{
+transform:scale(2) translateY(-20px);
+opacity:0;
+}
+}
+
+/* NAVBAR */
+.navbar{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+padding:15px 30px;
+border-radius:50px;
+background:rgba(255,77,240,0.15);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,77,240,0.4);
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:10;
+}
+
+.logo{
+font-family:'Orbitron',sans-serif;
+font-size:22px;
+color:#ff4df0;
+text-shadow:0 0 15px #ff4df0;
+}
+
+.nav-links{
+display:flex;
+gap:35px;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+position:relative;
+}
+
+.nav-links a::after{
+content:'';
+position:absolute;
+width:0;
+height:2px;
+background:#ff4df0;
+left:0;
+bottom:-5px;
+transition:.4s;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+background:url('https://image2url.com/r2/default/images/1773394994669-65da3180-ee13-452c-b142-dbfb7717d190.png') center/cover no-repeat;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+overflow:hidden;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(180deg,rgba(0,0,0,0.3),black);
+}
+
+/* FLOAT PARTICLES */
+.particle{
+position:absolute;
+width:3px;
+height:3px;
+background:#ff4df0;
+border-radius:50%;
+box-shadow:0 0 10px #ff4df0;
+animation:move 12s linear infinite;
+}
+
+@keyframes move{
+from{transform:translateY(110vh);}
+to{transform:translateY(-10vh);}
+}
+
+/* CONTENT */
+.content{
+z-index:2;
+max-width:700px;
+padding:20px;
+}
+
+.title{
+font-size:70px;
+font-family:'Orbitron',sans-serif;
+color:#ff4df0;
+text-shadow:0 0 40px #ff4df0;
+animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+50%{transform:translateY(-15px);}
+}
+
+.badge{
+margin-top:20px;
+padding:10px 40px;
+border-radius:40px;
+background:rgba(255,77,240,0.2);
+border:1px solid rgba(255,77,240,0.5);
+display:inline-block;
+}
+
+.desc{
+margin-top:20px;
+color:#ddd;
+line-height:28px;
+}
+
+/* BUTTON */
+.btn{
+margin-top:40px;
+display:inline-block;
+padding:18px 70px;
+border-radius:60px;
+background:linear-gradient(90deg,#ff4df0,#ff0080);
+color:white;
+text-decoration:none;
+box-shadow:0 0 25px #ff4df0;
+position:relative;
+overflow:hidden;
+transition:.3s;
+animation:pulse 2s infinite;
+cursor:pointer;
+}
+
+.btn:hover{
+transform:translateY(-6px) scale(1.05);
+box-shadow:0 0 60px #ff4df0;
+}
+
+@keyframes pulse{
+0%{box-shadow:0 0 15px #ff4df0;}
+50%{box-shadow:0 0 50px #ff4df0;}
+100%{box-shadow:0 0 15px #ff4df0;}
+}
+
+.btn span{
+position:absolute;
+border-radius:50%;
+transform:scale(0);
+background:rgba(255,255,255,0.6);
+animation:ripple .6s linear;
+pointer-events:none;
+}
+
+@keyframes ripple{
+to{
+transform:scale(4);
+opacity:0;
+}
+}
+
+/* MOBILE */
+.menu-btn{
+display:none;
+font-size:28px;
+cursor:pointer;
+}
+
+@media(max-width:768px){
+
+.title{font-size:42px;}
+
+.nav-links{
+position:fixed;
+right:-100%;
+top:0;
+width:70%;
+height:100vh;
+background:black;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+transition:.5s;
+}
+
+.nav-links.active{right:0;}
+.menu-btn{display:block;}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cursor-dot" id="cursor"></div>
+
+<nav class="navbar">
+<div class="logo">⭐ Zell_Rizu</div>
+
+<div class="nav-links" id="nav">
+<a href="#">Home</a>
+<a href="#">Quotes</a>
+<a href="#">Contact</a>
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+</nav>
+
+<section class="hero" id="hero">
+
+<div class="content">
+<div class="title">Zell Store</div>
+
+<div class="badge">Tempat top Up murah • Aman • Terpercaya</div>
+
+<p class="desc">
+Butuh topup game cepat, murah, dan tanpa ribet?<br>
+Dadan Store hadir buat kamu para gamers yang pengen main tanpa delay dan tanpa drama.
+Proses super cepat, harga ramah di dompet, dan pastinya 100% aman & terpercaya 💯
+</p>
+
+<a id="masukBtn" class="btn">MASUK SEKARANG</a>
+
+</div>
+</section>
+
+<script>
+
+const nav = document.getElementById("nav")
+const hero = document.getElementById("hero")
+const cursor = document.getElementById("cursor")
+const masukBtn = document.getElementById("masukBtn")
+
+let mouseX=0
+let mouseY=0
+let posX=0
+let posY=0
+
+function toggleMenu(){
+nav.classList.toggle("active")
+}
+
+/* FLOAT PARTICLES */
+for(let i=0;i<25;i++){
+let p=document.createElement("div")
+p.className="particle"
+p.style.left=Math.random()*100+"%"
+p.style.animationDuration=8+Math.random()*6+"s"
+hero.appendChild(p)
+}
+
+/* CURSOR PARTICLE */
+document.addEventListener("mousemove",e=>{
+mouseX=e.clientX
+mouseY=e.clientY
+
+let spark=document.createElement("div")
+spark.className="spark"
+spark.style.left=mouseX+"px"
+spark.style.top=mouseY+"px"
+document.body.appendChild(spark)
+
+setTimeout(()=>spark.remove(),700)
+})
+
+function animate(){
+posX += (mouseX-posX)*0.2
+posY += (mouseY-posY)*0.2
+
+cursor.style.left=posX+"px"
+cursor.style.top=posY+"px"
+
+requestAnimationFrame(animate)
+}
+animate()
+
+/* BUTTON RIPPLE + REDIRECT */
+masukBtn.addEventListener("click",function(e){
+
+let rect=this.getBoundingClientRect()
+let x=e.clientX-rect.left
+let y=e.clientY-rect.top
+
+let ripple=document.createElement("span")
+ripple.style.left=x+"px"
+ripple.style.top=y+"px"
+this.appendChild(ripple)
+
+this.style.transform="scale(.9)"
+this.style.opacity=".7"
+
+setTimeout(()=>{
+window.location.href="https://id.pinterest.com/"
+},400)
+
+})
+
+</script>
+
+</body>
+</html>
